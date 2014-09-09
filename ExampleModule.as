@@ -42,13 +42,21 @@
 			this.gameAPI.SendServerCommand("BuyAbilityPoint 1");
 		}
 		
-		public function screenResize(stageX:int, stageY:int, xScale:Number, yScale:Number){
+		public function screenResize(stageX:int, stageY:int, scaleRatio:Number){
 			//position 'this', being this module, at the center of the screen
 			this.x = stageX/2;
 			this.y = stageY/2;
-			//set the scale of this module
-			this.scaleX = xScale;
-			this.scaleY = yScale;
+			
+			//save this movieClip's original scale
+			if(this["originalXScale"] == null)
+			{
+				this["originalXScale"] = this.scaleX;
+				this["originalYScale"] = this.scaleY;
+			}
+    
+			//Scale this module/movieClip by the scaleRatio
+			this.scaleX = this.originalXScale * scaleRatio;
+			this.scaleY = this.originalYScale * scaleRatio;
 		}
 	}	
 }
