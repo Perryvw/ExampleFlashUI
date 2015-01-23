@@ -33,31 +33,14 @@
 		
 		//this handles the resizes - credits to Nullscope
 		public function onResize(re:ResizeManager) : * {
-			var rm = Globals.instance.resizeManager;
-			var currentRatio:Number =  re.ScreenWidth / re.ScreenHeight;
-			var divided:Number;
-		
-			// Set this to your stage height, however, if your assets are too big/small for 1024x768, you can change it
-			// This is just your original stage height
-			var originalHeight:Number = 900;
+			var scaleRatioY:Number = re.ScreenHeight/900;
 					
-			if(currentRatio < 1.5)
-			{
-				// 4:3
-				divided = currentRatio / 1.333;
+			if (re.ScreenHeight > 900){
+				scaleRatioY = 1;
 			}
-			else if(re.Is16by9()){
-				// 16:9
-				divided = currentRatio / 1.7778;
-			} else {
-				// 16:10
-				divided = currentRatio / 1.6;
-			}
-							
-			 var correctedRatio:Number =  re.ScreenHeight / originalHeight * divided;
 			
 			//pass the resize event to our module, we pass the width and height of the screen, as well as the correctedRatio.
-			this.myModule.screenResize(re.ScreenWidth, re.ScreenHeight, correctedRatio);
+			this.myModule.screenResize(re.ScreenWidth, re.ScreenHeight, scaleRatioY);
 		}
 	}
 }
